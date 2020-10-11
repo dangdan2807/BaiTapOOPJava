@@ -1,4 +1,4 @@
-package Module3.Bai1;
+package src.Module3.Bai1;
 
 public class TestXe {
     public static void main(String[] args) {
