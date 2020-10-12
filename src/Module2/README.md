@@ -1,6 +1,7 @@
 # Bài Tập OOP Java - Module 2
 
 1. **Bài 2:**
+   
     ![Module2-bai2_1](../image/Module2-bai2_1.png)
     ![Module2-bai2_2](../image/Module2-bai2_2.png)
 2. **Bài 3:**

@@ -118,7 +118,7 @@ public class Sach {
 
     public String toString() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return String.format("%-10s %-15s %-10.2f %-10d %-20s", maSach, dtf.format(ngayNhap), donGia, soLuong, nxb);
+        return String.format("%-20s %-15s %-10.2f %-10d %-20s", maSach, dtf.format(ngayNhap), donGia, soLuong, nxb);
     }
 
 }
