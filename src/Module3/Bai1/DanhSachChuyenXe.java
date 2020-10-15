@@ -15,18 +15,13 @@ public class DanhSachChuyenXe {
     }
 
     public boolean themXe(Xe xe) {
-        if(xe != null)
-        {
-            if(count > 100)
-            {
+        if (xe != null) {
+            if (count > 100) {
                 System.out.println("Không thể thêm được, Mảng Full!!");
                 return false;
-            }
-            else
-            {
+            } else {
                 for (int i = 0; i < count; i++) {
-                    if(dsXe[i].getMaSoChuyen().equalsIgnoreCase(xe.getMaSoChuyen()))
-                    {
+                    if (dsXe[i].getMaSoChuyen().equalsIgnoreCase(xe.getMaSoChuyen())) {
                         System.out.println("Chuyến xe đã tồn tại");
                         return false;
                     }
@@ -42,7 +37,7 @@ public class DanhSachChuyenXe {
     public void xuatXeNoiThanh() {
         System.out.println("\nXuất danh sách xe Nội Thành");
         for (int i = 0; i < count; i++) {
-            if(dsXe[i] instanceof NoiThanh)
+            if (dsXe[i] instanceof NoiThanh)
                 System.out.println(dsXe[i].toString());
         }
     }
@@ -50,7 +45,7 @@ public class DanhSachChuyenXe {
     public void xuatXeNgoaiThanh() {
         System.out.println("\nXuất danh sách xe Ngoại Thành");
         for (int i = 0; i < count; i++) {
-            if(dsXe[i] instanceof NgoaiThanh)
+            if (dsXe[i] instanceof NgoaiThanh)
                 System.out.println(dsXe[i].toString());
         }
     }
@@ -72,9 +67,9 @@ public class DanhSachChuyenXe {
     public void tinhTienTungLoaiXe() {
         double tienNT = 0, tienNgT = 0;
         for (int i = 0; i < count; i++) {
-            if(dsXe[i] instanceof NoiThanh)
+            if (dsXe[i] instanceof NoiThanh)
                 tienNT += dsXe[i].getDoanhThu();
-            if(dsXe[i] instanceof NgoaiThanh)
+            if (dsXe[i] instanceof NgoaiThanh)
                 tienNgT += dsXe[i].getDoanhThu();
         }
         System.out.println("\nTổng Tiền Xe Nội Thành: " + tienNT);

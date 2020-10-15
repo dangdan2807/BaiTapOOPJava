@@ -9,8 +9,12 @@ public class SinhVien {
      * @param hoTen
      */
     public SinhVien(String maSV, String hoTen) {
-        this.maSV = maSV;
-        this.hoTen = hoTen;
+        setMaSV(maSV);
+        setHoTen(hoTen);
+    }
+
+    public SinhVien() {
+        this("", "");
     }
 
     /**
@@ -24,6 +28,8 @@ public class SinhVien {
      * @param maSV the maSV to set
      */
     public void setMaSV(String maSV) {
+        if(maSV.length() == 0 || maSV.equals(""))
+            maSV = "0";
         this.maSV = maSV;
     }
 
@@ -38,6 +44,8 @@ public class SinhVien {
      * @param hoTen the hoTen to set
      */
     public void setHoTen(String hoTen) {
+        if (hoTen.length() == 0 || hoTen.equals(""))
+            hoTen = "Chưa xác định";
         this.hoTen = hoTen;
     }
 
