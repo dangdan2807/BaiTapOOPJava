@@ -37,7 +37,7 @@ public class Sach {
      * @param ngayNhap the ngayNhap to set
      */
     public void setNgayNhap(LocalDate ngayNhap) {
-        if (ngayNhap.isBefore(LocalDate.now()))
+        if (ngayNhap.isAfter(LocalDate.now()))
             ngayNhap = LocalDate.now();
         this.ngayNhap = ngayNhap;
     }
@@ -105,8 +105,9 @@ public class Sach {
         setNxb(nxb);
     }
 
+    
     public double tinhTien() {
-        return donGia * soLuong;
+        return soLuong * donGia;
     }
 
     /**

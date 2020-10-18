@@ -35,6 +35,14 @@ public class SachGK extends Sach{
         setTinhTrang(tinhTrang);
     }
 
+    /**
+     * 
+     * 
+     */
+    public SachGK() {
+        this("", LocalDate.now(), 0, 0, "", "");
+    }
+
     @Override
     public double tinhTien() {
         double tien = 0;

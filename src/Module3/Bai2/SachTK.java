@@ -34,6 +34,13 @@ public class SachTK extends Sach {
         setThue(thue);
     }
 
+    /**
+     * 
+     */
+    public SachTK() {
+        this("", LocalDate.now(), 0, 0, "", 0);
+    }
+
     @Override
     public double tinhTien() {
         return getSoLuong() * getDonGia() + thue;
