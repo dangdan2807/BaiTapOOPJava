@@ -36,9 +36,9 @@ public class QLGD {
     public void tinhSoLuongTungLoaiGD() {
         int slGDNha = 0, slGDDat = 0;
         for (int i = 0; i < count; i++) {
-            if (ds[i] instanceof Dat)
+            if (ds[i] instanceof GDDat)
                 slGDDat++;
-            if (ds[i] instanceof Nha)
+            if (ds[i] instanceof GDNha)
                 slGDNha++;
         }
         System.out.println("\nTổng số giao dịch Nhà: " + slGDNha);
@@ -49,8 +49,8 @@ public class QLGD {
         double tien = 0;
         int dem = 0;
         for (int i = 0; i < count; i++) {
-            if (ds[i] instanceof Dat) {
-                tien += ((Dat) ds[i]).tinhTien();
+            if (ds[i] instanceof GDDat) {
+                tien += ((GDDat) ds[i]).tinhTien();
                 dem++;
             }
         }
@@ -58,6 +58,7 @@ public class QLGD {
     }
 
     public void xuatDsGD2013() {
+    	System.out.println("\nXuất những Giao Dịch trong tháng 9 năm 2013");
         System.out.printf("\n%-10s %-15s %-20s %-17s %-10s %-40s %-15s\n", "Mã GD", "Ngày GD", "Đơn Giá", "Diện tích", "Loại", "địa chỉ", "Thành Tiền");
         for (int i = 0; i < count; i++)
         {
@@ -67,6 +68,7 @@ public class QLGD {
     }
 
     public void xuatDS() {
+    	System.out.println("\nXuất tất các các giao dịch");
         System.out.printf("\n%-10s %-15s %-20s %-17s %-10s %-40s %-15s\n", "Mã GD", "Ngày GD", "Đơn Giá", "Diện tích", "Loại", "địa chỉ", "Thành Tiền");
         for (int i = 0; i < count; i++)
             System.out.println(ds[i].toString());

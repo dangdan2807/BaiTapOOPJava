@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class GiaoDichBDS {
-    private String maGD;
-    private LocalDate ngayGD;
-    private double donGia;
-    private double dienTich;
+    protected String maGD;
+    protected LocalDate ngayGD;
+    protected double donGia;
+    protected double dienTich;
 
     /**
      * @return String return the maGD
@@ -97,7 +97,7 @@ public class GiaoDichBDS {
     @Override
     public String toString() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DecimalFormat df = new DecimalFormat("#,##0");
+        DecimalFormat df = new DecimalFormat("#,##0.00");
         return String.format("%-10s %-15s %-20s %-15.2f", maGD, dtf.format(ngayGD), df.format(donGia), dienTich);
     }
 }

@@ -3,7 +3,7 @@ package Module3.Bai4;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
-public class Nha extends GiaoDichBDS {
+public class GDNha extends GiaoDichBDS {
     private String loaiNha;
     private String diaChi;
 
@@ -49,7 +49,7 @@ public class Nha extends GiaoDichBDS {
      * @param loaiNha
      * @param diaChi
      */
-    public Nha(String maGD, LocalDate ngayGD, double donGia, double dienTich, String loaiNha, String diaChi) {
+    public GDNha(String maGD, LocalDate ngayGD, double donGia, double dienTich, String loaiNha, String diaChi) {
         super(maGD, ngayGD, donGia, dienTich);
         setLoaiNha(loaiNha);
         setDiaChi(diaChi);
@@ -65,7 +65,7 @@ public class Nha extends GiaoDichBDS {
     }
 
     public String toString() {
-        DecimalFormat df = new DecimalFormat("#,##0");
+        DecimalFormat df = new DecimalFormat("#,##0.00");
         return String.format("%-65s %-10s %-40s %-15s", super.toString(), loaiNha, diaChi, df.format(tinhTien()));
     }
 }
