@@ -15,8 +15,7 @@ public class TestGDBDS {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             else
                 Runtime.getRuntime().exec("clear");
-        } catch (IOException | InterruptedException ex) {
-        }
+        } catch (IOException | InterruptedException ex) {}
     }
 
     // Overloading NhapSo()
@@ -98,7 +97,7 @@ public class TestGDBDS {
     }
 
     public static void main(String[] args) {
-        DecimalFormat df = new DecimalFormat("#,##0");
+        DecimalFormat df = new DecimalFormat("#,##0.## VND");
         QLGDBDS ds = new QLGDBDS();
         int choose, chon = 0;
         String temp;
@@ -172,9 +171,9 @@ public class TestGDBDS {
                     temp = input.nextLine();
                     break;
                 case 3:
-                    clrscr(); 
+                    clrscr();
                     ds.tinhSoLuongTungLoaiGD();
-                    
+
                     // dừng màng hình để xem kết quả
                     System.out.println("\nẤn phím bất kì để tiếp tục");
                     input.nextLine();
@@ -183,7 +182,7 @@ public class TestGDBDS {
                 case 4:
                     clrscr();
                     System.out.println("Xuất tổng thành tiền của GD đất: " + df.format(ds.tinhTBTienCuaGDDat()));
-                    
+
                     // dừng màng hình để xem kết quả
                     System.out.println("\nẤn phím bất kì để tiếp tục");
                     input.nextLine();
