@@ -41,11 +41,16 @@ public class QLGD {
 
     public double tinhTBThanhTienCuaGDTT() {
         double tien = 0;
+        int count = 0;
         for (int i = 0; i < ds.size(); i++) {
-            if (ds.get(i) instanceof GDTienTe)
+            if (ds.get(i) instanceof GDTienTe) {
                 tien += ds.get(i).thanhTien();
+                ++count;
+            }
         }
-        return tien;
+        if(count == 0)
+            return 0;
+        return (tien / count);
     }
 
     public void xuatGD1Ty() {

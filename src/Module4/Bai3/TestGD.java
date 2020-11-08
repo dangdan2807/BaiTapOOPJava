@@ -19,34 +19,70 @@ public class TestGD {
         }
     }
 
+    // Overloading NhapSo()
+    public static int nhapSo(int chon) {
+        boolean checkInput = true;
+        while (true) {
+            try {
+                chon = input.nextInt();
+                checkInput = true;
+            } catch (Exception e) {
+                System.out.println("Không hợp lệ nhập lại: ");
+                checkInput = false;
+                input.nextLine();
+            }
+            if (checkInput == true)
+                break;
+        }
+        return chon;
+    }
+    // Overloading NhapSo()
+    public static double nhapSo(double chon) {
+        boolean checkInput = true;
+        while (true) {
+            try {
+                chon = input.nextDouble();
+                checkInput = true;
+            } catch (Exception e) {
+                System.out.print("\nKhông hợp lệ nhập lại: ");
+                checkInput = false;
+                input.nextLine();
+            }
+            if (checkInput == true)
+                break;
+        }
+        return chon;
+    }
+
     public static GiaoDich nhap(int n) {
-        System.out.println("Nhap thong tin giao dich vang: ");
+        System.out.println("Nhap thong tin giao dich: ");
         Scanner s = new Scanner(System.in);
-        System.out.println("Nhập mã GD: ");
+        System.out.print("Nhập mã GD: ");
         String magd = s.nextLine();
         s = new Scanner(System.in);
-        int ngay, thang, nam;
-        System.out.println("nhap ngay: ");
-        ngay = s.nextInt();
-        System.out.println("nhap thang: ");
-        thang = s.nextInt();
-        System.out.println("nhap nam: ");
-        nam = s.nextInt();
-        System.out.println("nhap don gia: ");
-        int donGia = s.nextInt();
-        System.out.println("nhap so luong gd: ");
-        int soLuong = s.nextInt();
-        int tiGia = 1;
-        if (n == 1) {
-            System.out.println("nhap ti gia");
-            tiGia = s.nextInt();
-            System.out.println("nhap loai tien te: ");
+        int ngay = 0, thang = 0, nam = 0;
+        System.out.print("nhap ngay: ");
+        ngay = nhapSo(ngay);
+        System.out.print("nhap thang: ");
+        thang = nhapSo(thang);
+        System.out.print("nhap nam: ");
+        nam = nhapSo(nam);
+        System.out.print("nhap don gia: ");
+        double donGia = s.nextDouble();
+        System.out.print("nhap so luong gd: ");
+        int soLuong = 0; 
+        soLuong = nhapSo(soLuong);
+        double tiGia = 1;
+        if (n == 2) {
+            System.out.print("nhap ti gia");
+            tiGia = nhapSo(tiGia);
+            System.out.print("nhap loai tien te: ");
         } else
-            System.out.println("nhap loai Vang: ");
+            System.out.print("nhap loai Vang: ");
         s = new Scanner(System.in);
         String loai = s.nextLine();
         GiaoDich gd;
-        if (n == 1)
+        if (n == 2)
             gd = new GDTienTe(magd, LocalDate.of(nam, thang, ngay), donGia, soLuong, tiGia, loai);
         else
             gd = new GDVang(magd, LocalDate.of(nam, thang, ngay), donGia, soLuong, loai);
@@ -57,6 +93,7 @@ public class TestGD {
         DecimalFormat df = new DecimalFormat("#,##0.## VND");
         QLGD ds = new QLGD();
         int choose, chon = 0;
+        String temp;
         // ds.themGD(new GDVang("Vang01", LocalDate.of(2020, 4, 1), 1000000000, 3,
         // "9999"));
         // ds.themGD(new GDVang("Vang02", LocalDate.of(2020, 3, 25), 5000000, 7,
@@ -72,12 +109,13 @@ public class TestGD {
         // ds.xuatDS();
 
         do {
-            // clrscr();
+            clrscr();
             System.out.println("========== MENU ==========");
             System.out.println("1. Thêm Giao Dịch");
             System.out.println("2. Xuất Giao Dịch");
-            System.out.println("3. Xuất tổng thành tiền của giao dịch tiền tệ");
-            System.out.println("4. Xuất danh sách tất cả các giao dịch lớn hơn 1 tỷ");
+            System.out.println("3. Xuất tổng số lượng của từng loại giao dịch");
+            System.out.println("4. Tính trung bình thành tiền của giao dịch tiền tệ");
+            System.out.println("5. Xuất danh sách tất cả các giao dịch lớn hơn 1 tỷ");
             System.out.println("0. Thoát");
             System.out.println("\nNhập lựa chọn: ");
             try {
@@ -92,14 +130,14 @@ public class TestGD {
                     System.out.println("Kết thúc Chương trình");
                     return;
                 case 1:
-                    // clrscr();
+                    clrscr();
                     input = new Scanner(System.in);
                     System.out.println("1. Tạo giao dịch vàng");
                     System.out.println("2. Tạo giao dịch tiền tệ");
                     boolean checkInput = true;
                     while (true) {
                         try {
-                            System.out.println("Nhập lựa chọn: ");
+                            System.out.println("Nhập số: ");
                             chon = input.nextInt();
                             checkInput = true;
                         } catch (Exception e) {
@@ -114,22 +152,40 @@ public class TestGD {
                     ds.themGD(gd);
                     break;
                 case 2:
-                    // clrscr();
+                    clrscr();
                     ds.xuatDS();
+                    // dừng màng hình để xem kết quả
+                    System.out.println("\nẤn phím bất kì để tiếp tục");
+                    input.nextLine();
+                    temp = input.nextLine();
                     break;
                 case 3:
-                    // clrscr();
-                    System.out
-                            .println("Xuất tổng thành tiền của GD tiền tệ: " + df.format(ds.tinhTBThanhTienCuaGDTT()));
+                    clrscr();
+                    ds.soLuongTungLoaiGD();
+                    // dừng màng hình để xem kết quả
+                    System.out.println("\nẤn phím bất kì để tiếp tục");
+                    input.nextLine();
+                    temp = input.nextLine();
                     break;
                 case 4:
-                    // clrscr();
+                    clrscr();
+                    System.out.println("Trung bình thành tiền của giao dịch tiền tệ: " + ds.tinhTBThanhTienCuaGDTT());
+                    // dừng màng hình để xem kết quả
+                    System.out.println("\nẤn phím bất kì để tiếp tục");
+                    input.nextLine();
+                    temp = input.nextLine();
+                    break;
+                case 5:
+                    clrscr();
                     ds.xuatGD1Ty();
+                    // dừng màng hình để xem kết quả
+                    System.out.println("\nẤn phím bất kì để tiếp tục");
+                    input.nextLine();
+                    temp = input.nextLine();
                     break;
                 default:
                     break;
             }
-
         } while (true);
     }
 }
