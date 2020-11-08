@@ -1,11 +1,11 @@
-package Module4.Bai3;
+package Module4.Bai4;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class TestGD {
+public class TestGDBDS {
     static Scanner input = new Scanner(System.in);
 
     // Clears Screen in java
@@ -55,68 +55,78 @@ public class TestGD {
         return chon;
     }
 
-    public static GiaoDich nhap(int n) {
-        System.out.println("Nhap thong tin giao dich: ");
-        Scanner s = new Scanner(System.in);
-        System.out.print("Nhập mã GD: ");
-        String magd = s.nextLine();
-        s = new Scanner(System.in);
-        int ngay = 0, thang = 0, nam = 0;
-        System.out.print("nhap ngay: ");
+    public static GiaoDichBDS nhap(int n) {
+        GiaoDichBDS gd;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Nhap thong tin giao dich\n");
+
+        System.out.print("Nhap ma gd: ");
+        String magd = scan.nextLine();
+        System.out.print("Nhap ngay gd: ");
+        int ngay = 0;
         ngay = nhapSo(ngay);
-        System.out.print("nhap thang: ");
+        System.out.print("Nhap thang gd: ");
+        int thang = 0;
         thang = nhapSo(thang);
-        System.out.print("nhap nam: ");
+        System.out.print("Nhap nam gd: ");
+        int nam = 0;
         nam = nhapSo(nam);
-        System.out.print("nhap don gia: ");
-        double donGia = s.nextDouble();
-        System.out.print("nhap so luong gd: ");
-        int soLuong = 0;
-        soLuong = nhapSo(soLuong);
-        double tiGia = 1;
-        if (n == 2) {
-            System.out.print("nhap ti gia");
-            tiGia = nhapSo(tiGia);
-            System.out.print("nhap loai tien te: ");
-        } else
-            System.out.print("nhap loai Vang: ");
-        s = new Scanner(System.in);
-        String loai = s.nextLine();
-        GiaoDich gd;
-        if (n == 2)
-            gd = new GDTienTe(magd, LocalDate.of(nam, thang, ngay), donGia, soLuong, tiGia, loai);
-        else
-            gd = new GDVang(magd, LocalDate.of(nam, thang, ngay), donGia, soLuong, loai);
+        System.out.print("Nhap don gia: ");
+        double donGia = 0;
+        donGia = nhapSo(donGia);
+        System.out.print("Nhap dien tich: ");
+        double dienTich = 0;
+        dienTich = nhapSo(dienTich);
+        String loai, diaChi;
+        if (n == 1) {
+            // GDDat
+            System.out.print("Nhap loai dat: ");
+            scan = new Scanner(System.in);
+            loai = scan.nextLine();
+            gd = new GDDat(magd, LocalDate.of(nam, thang, ngay), donGia, dienTich, loai);
+        } else {
+            // GDNha
+            System.out.print("Nhap loai nha: ");
+            scan = new Scanner(System.in);
+            loai = scan.nextLine();
+            System.out.print("Nhap dia chi: ");
+            scan = new Scanner(System.in);
+            diaChi = scan.nextLine();
+            gd = new GDNha(magd, LocalDate.of(nam, thang, ngay), donGia, dienTich, loai, diaChi);
+        }
         return gd;
     }
 
     public static void main(String[] args) {
-        DecimalFormat df = new DecimalFormat("#,##0.## VND");
-        QLGD ds = new QLGD();
+        DecimalFormat df = new DecimalFormat("#,##0");
+        QLGDBDS ds = new QLGDBDS();
         int choose, chon = 0;
         String temp;
-        // ds.themGD(new GDVang("Vang01", LocalDate.of(2020, 4, 1), 1000000000, 3,
-        // "9999"));
-        // ds.themGD(new GDVang("Vang02", LocalDate.of(2020, 3, 25), 5000000, 7,
-        // "999"));
-        // ds.themGD(new GDTienTe("VN01", LocalDate.of(2020, 9, 14), 1000000000, 1, 1f,
-        // "VND"));
-        // ds.themGD(new GDTienTe("VN02", LocalDate.of(2019, 4, 14), 10000000, 1, 21f,
-        // "USD"));
+        // ds.themGD(new GDDat("Dat01", LocalDate.of(2013, 9, 13), 10000000, 200, "C"));
+        // ds.themGD(new GDDat("Dat02", LocalDate.of(2015, 5, 15), 15000000, 100, "B"));
+        // ds.themGD(new GDDat("Dat03", LocalDate.of(2019, 12, 28), 20000000, 100,
+        // "A"));
+        // ds.themGD(new GDNha("Nha01", LocalDate.of(2020, 8, 7), 20000000, 100,
+        // "thuong", "9 Nguyễn Văn Bảo, Q.Gò Vấp, TP.HCM"));
+        // ds.themGD(new GDNha("Nha02", LocalDate.of(2013, 7, 26), 25000000, 200, "cao
+        // cap", "7 Nguyễn Thái Bình, Q.Gò Vấp, TP.HCM"));
+        // ds.themGD(new GDNha("Nha03", LocalDate.of(2018, 8, 4), 30000000, 250, "Cao
+        // Cấp", "15 Lê Lợi, Q.Gò Vấp, TP.HCM"));
 
-        // System.out.println("Xuất tổng thành tiền của GD tiền tệ: " +
-        // df.format(ds.tinhTBThanhTienCuaGDTT()));
-        // ds.xuatGD1Ty();
+        // ds.tinhSoLuongTungLoaiGD();
+        // System.out.printf("Tổng TB tiền của GD Đất: %s",
+        // df.format(ds.tinhTBTienCuaGDDat()));
+        // ds.xuatDsGD2013();
+
         // ds.xuatDS();
-
         do {
             clrscr();
             System.out.println("========== MENU ==========");
             System.out.println("1. Thêm Giao Dịch");
             System.out.println("2. Xuất Giao Dịch");
             System.out.println("3. Xuất tổng số lượng của từng loại giao dịch");
-            System.out.println("4. Tính trung bình thành tiền của giao dịch tiền tệ");
-            System.out.println("5. Xuất danh sách tất cả các giao dịch lớn hơn 1 tỷ");
+            System.out.println("4. Tính trung bình thành tiền của giao dịch đất");
+            System.out.println("5. Xuất ra các giao dịch của tháng 9 năm 2013");
             System.out.println("0. Thoát");
             System.out.println("\nNhập lựa chọn: ");
             try {
@@ -133,12 +143,12 @@ public class TestGD {
                 case 1:
                     clrscr();
                     input = new Scanner(System.in);
-                    System.out.println("1. Tạo giao dịch vàng");
-                    System.out.println("2. Tạo giao dịch tiền tệ");
+                    System.out.println("1. Tạo giao dịch đất");
+                    System.out.println("2. Tạo giao dịch nhà");
                     boolean checkInput = true;
                     while (true) {
                         try {
-                            System.out.println("Nhập số: ");
+                            System.out.println("Nhập lựa chọn: ");
                             chon = input.nextInt();
                             checkInput = true;
                         } catch (Exception e) {
@@ -148,21 +158,23 @@ public class TestGD {
                         if (checkInput == true && (chon == 1 || chon == 2))
                             break;
                     }
-                    GiaoDich gd;
+                    GiaoDichBDS gd;
                     gd = nhap(chon);
                     ds.themGD(gd);
                     break;
                 case 2:
                     clrscr();
                     ds.xuatDS();
+
                     // dừng màng hình để xem kết quả
                     System.out.println("\nẤn phím bất kì để tiếp tục");
                     input.nextLine();
                     temp = input.nextLine();
                     break;
                 case 3:
-                    clrscr();
-                    ds.soLuongTungLoaiGD();
+                    clrscr(); 
+                    ds.tinhSoLuongTungLoaiGD();
+                    
                     // dừng màng hình để xem kết quả
                     System.out.println("\nẤn phím bất kì để tiếp tục");
                     input.nextLine();
@@ -170,7 +182,8 @@ public class TestGD {
                     break;
                 case 4:
                     clrscr();
-                    System.out.println("Trung bình thành tiền của giao dịch tiền tệ: " + ds.tinhTBThanhTienCuaGDTT());
+                    System.out.println("Xuất tổng thành tiền của GD đất: " + df.format(ds.tinhTBTienCuaGDDat()));
+                    
                     // dừng màng hình để xem kết quả
                     System.out.println("\nẤn phím bất kì để tiếp tục");
                     input.nextLine();
@@ -178,7 +191,8 @@ public class TestGD {
                     break;
                 case 5:
                     clrscr();
-                    ds.xuatGD1Ty();
+                    ds.xuatDsGD2013();
+
                     // dừng màng hình để xem kết quả
                     System.out.println("\nẤn phím bất kì để tiếp tục");
                     input.nextLine();
