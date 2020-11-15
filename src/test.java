@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class test {
     private static Scanner sc = new Scanner(System.in);
+    private static Scanner scan;
 
     public int nhapSo(int n) {
         boolean checkInput = true;
@@ -21,7 +22,7 @@ public class test {
         return id;
     }
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+        scan = new Scanner(System.in);
         String a = scan.next();
         System.out.println(a);
     }

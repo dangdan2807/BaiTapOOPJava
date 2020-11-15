@@ -46,7 +46,6 @@ public class GDVang extends GiaoDich {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         DecimalFormat df = new DecimalFormat("#,##0.## VND");
         return super.toString() + String.format("%-10s %-15s %-10s", "", loaiVang, df.format(thanhTien()));
     }

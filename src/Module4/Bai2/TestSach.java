@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class TestSach {
     static Scanner input = new Scanner(System.in);
+    private static Scanner scan = new Scanner(System.in);
 
     // Clears Screen in java
     public static void clrscr() {
@@ -57,7 +58,6 @@ public class TestSach {
 
     public static Sach nhapSach(int n) {
         Sach x;
-        Scanner scan = new Scanner(System.in);
         System.out.println("Nhap ma sach: ");
         String maSach = scan.next();
 
@@ -106,7 +106,7 @@ public class TestSach {
         DecimalFormat df = new DecimalFormat("#,##0.## VND");
         int choose, chon = 0;
         String temp;
-
+        temp = "";
         // ds.themSach(new SachGK("GK01", LocalDate.of(2016, 5, 26), 50000, 5, "NXB Kim
         // Dong", "moi"));
         // ds.themSach(new SachGK("GK02", LocalDate.of(2020, 11, 26), 45000, 3, "NXB
@@ -207,24 +207,5 @@ public class TestSach {
                     break;
             }
         } while (true);
-        // ds.themSach(new SachGK("GK01", LocalDate.of(2016, 5, 26), 50000, 5, "NXB Kim
-        // Dong", "moi"));
-        // ds.themSach(new SachGK("GK02", LocalDate.of(2020, 11, 26), 45000, 3, "NXB
-        // Giao Duc", "cu"));
-        // ds.themSach(new SachGK("GK03", LocalDate.of(2019, 11, 26), 45000, 3, "NXB
-        // Tre", "moi"));
-
-        // ds.themSach(new SachTK("TK01", LocalDate.of(2020, 11, 26), 60000, 3, "NXB Kim
-        // Dong", 5));
-        // ds.themSach(new SachTK("TK02", LocalDate.of(2020, 11, 26), 25000, 7, "NXB
-        // Tre", 3.5));
-        // ds.themSach(new SachTK("TK03", LocalDate.of(2020, 11, 26), 25000, 7, "NXB
-        // Giao Duc", 7));
-
-        // ds.tinhTienTungLoaiSach();
-        // ds.tinhTBCongSTK();
-        // ds.xuatSGKNXBK("NXB kim Dong");
-        // ds.xuatSach();
-
     }
 }

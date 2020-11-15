@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class KhachSan {
     private int count;
     private PhongTro[] ds;
+    private Scanner scan = new Scanner(System.in);
 
     /**
      * 
@@ -38,7 +39,6 @@ public class KhachSan {
 
     public void xoaPT() {
         int cmmd;
-        Scanner scan = new Scanner(System.in);
         System.out.print("Nhap cmmd can xoa: ");
         cmmd = scan.nextInt();
         for (int i = 0; i < count; i++) {

@@ -105,7 +105,6 @@ public class TestKH {
         QLKhachHang ds = new QLKhachHang();
         int choose, chon = 0;
         String temp;
-
         // ds.themKH(new KHVietNam("VN01", "Phạm Văn Toàn", LocalDate.of(2018, 9, 25),
         // 100, 3000, "Sinh hoạt", 200));
         // ds.themKH(new KHVietNam("VN02", "Nguyễn Tấn Thanh", LocalDate.of(2020, 9,
@@ -114,12 +113,6 @@ public class TestKH {
         // 3), 200, 3200, "USA"));
         // ds.themKH(new KHNuocNgoai("NN02", "Trần Ngọc Ngân", LocalDate.of(2018, 9, 3),
         // 100, 3200, "Singapore"));
-
-        // ds.tinhTongSoLuongTungLoaiKH();
-        // System.out.printf("Tổng TB tiền của Khách hàng nước ngoài: %s",
-        // df.format(ds.tinhTBThanhTienKHNN()));
-        // ds.xuatDSHD092018();
-        // ds.xuatDS();
 
         do {
             clrscr();
