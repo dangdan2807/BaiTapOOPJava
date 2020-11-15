@@ -1,5 +1,6 @@
 package Module4.Bai2;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 public class SachGK extends Sach {
@@ -54,6 +55,7 @@ public class SachGK extends Sach {
     }
 
     public String toString() {
-        return super.toString() + String.format("%-10s %-20.2f", tinhTrang, tinhTien());
+        DecimalFormat df = new DecimalFormat("#,##0.## VND");
+        return super.toString() + String.format("%-15s %-20s", tinhTrang, df.format(tinhTien()));
     }
 }

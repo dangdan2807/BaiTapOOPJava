@@ -1,10 +1,9 @@
-
 import java.util.Scanner;
 
 public class test {
     private static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public int nhapSo(int n) {
         boolean checkInput = true;
         int id = 0;
         while(true) {
@@ -18,7 +17,12 @@ public class test {
             }
             if(checkInput == true && (id == 1 || id == 2))
                 break;
-        } //while (!checkInput && (id != 1));
-        System.out.println("ID là: " + id);
+        }
+        return id;
+    }
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String a = scan.next();
+        System.out.println(a);
     }
 }

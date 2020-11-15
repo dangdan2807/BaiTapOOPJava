@@ -1,5 +1,6 @@
 package Module4.Bai2;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -116,7 +117,8 @@ public abstract class Sach {
 
     public String toString() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return String.format("%-20s %-15s %-10.2f %-10d %-20s", maSach, dtf.format(ngayNhap), donGia, soLuong, nxb);
+        DecimalFormat df = new DecimalFormat("#,##0.##");
+        return String.format("%-15s %-15s %-10s %-10s %-20s ", maSach, dtf.format(ngayNhap), df.format(donGia), df.format(soLuong), nxb);
     }
 
 }
