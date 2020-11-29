@@ -103,19 +103,15 @@ public class testHH {
             str = "Sanh Su";
         System.out.println("Nhap thong tin cua hang hoa" + str);
 
-        System.out.print("Nhap ma hang: ");
         String maHang = "";
         maHang = Input(maHang, "ma hang");
 
-        System.out.print("Nhap ten hang: ");
         String tenHang = "";
         tenHang = Input(tenHang, "ten hang");
 
-        System.out.print("Nhap don gia: ");
         double donGia = 0;
         donGia = Input(donGia, "don gia");
 
-        System.out.print("Nhap so luong ton kho: ");
         int soLuong = 0;
         soLuong = Input(soLuong, "so luong");
 
