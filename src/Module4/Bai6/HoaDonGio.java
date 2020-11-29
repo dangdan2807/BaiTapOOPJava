@@ -55,6 +55,6 @@ public class HoaDonGio extends HoaDon {
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("#,##0.## VND");
-        return super.toString() + String.format("%-10d %-15s", soGioThue, df.format(thanhTien()));
+        return super.toString() + String.format("%-17d %-15s", soGioThue, df.format(thanhTien()));
     }
 }

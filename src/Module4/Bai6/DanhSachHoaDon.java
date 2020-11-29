@@ -48,12 +48,12 @@ public class DanhSachHoaDon {
 
     public double tinhTongThanhTien(int thang, int nam) {
         double tien = 0;
-        for (int i = 0; i < ds.size(); i++) {
-            if (ds.get(i).getNgayHD().getMonth().getValue() == thang && ds.get(i).getNgayHD().getYear() == nam) {
-                if(ds.get(i) instanceof HoaDonGio)
-                    tien += ((HoaDonGio)ds.get(i)).thanhTien();
+        for (HoaDon i : ds) {
+            if (i.getNgayHD().getMonth().getValue() == thang && i.getNgayHD().getYear() == nam) {
+                if(i instanceof HoaDonGio)
+                    tien += ((HoaDonGio)i).thanhTien();
                 else
-                    tien += ((HoaDonNgay)ds.get(i)).thanhTien();
+                    tien += ((HoaDonNgay)i).thanhTien();
             }
         }
         return tien;
@@ -61,6 +61,7 @@ public class DanhSachHoaDon {
 
     public void xuatDS() {
         System.out.println("\nXuat DS Cac Hoa Don");
+        System.out.printf("%-20s %-15s %-20s %-15s %-10s %-17s %-15s\n", "Ma Hoa Don", "Ngay Hoa Don", "Ten KH", "Ma Phong", "Don Gia", "So Ngay/Gio", "Thanh Tien");
         for (HoaDon i : ds) {
             System.out.println(i);
         }

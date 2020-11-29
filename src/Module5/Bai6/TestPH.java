@@ -1,11 +1,11 @@
 package Module5.Bai6;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class TestPH {
     static Scanner input = new Scanner(System.in);
+    private static Scanner scan = new Scanner(System.in);
 
     // Clears Screen in java
     public static void clrscr() {
@@ -56,8 +56,6 @@ public class TestPH {
 
     public static PhongHoc nhap(int n) {
         PhongHoc ph;
-        Scanner scan = new Scanner(System.in);
-
         System.out.print("Nhap ma phong: ");
         String maPhong = scan.next();
         scan = new Scanner(System.in);
@@ -104,7 +102,6 @@ public class TestPH {
     }
 
     public static void main(String[] args) {
-        DecimalFormat df = new DecimalFormat("#,##0.## VND");
         QuanLyPH ds = new QuanLyPH();
         int choose, chon = 0;
         String temp;
