@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class NhanVienBienChe extends NhanVien {
     private double heSoLuong;
-    private String tienDo;
+    private boolean tienDo;
 
     /**
      * @return double return the heSoLuong
@@ -18,9 +18,9 @@ public class NhanVienBienChe extends NhanVien {
      * @param heSoLuong the heSoLuong to set
      */
     public void setHeSoLuong(double heSoLuong) {
-        if(heSoLuong < 2.34)
+        if (heSoLuong < 2.34)
             heSoLuong = 2.34;
-        else if(heSoLuong > 4.98)
+        else if (heSoLuong > 4.98)
             heSoLuong = 4.98;
         this.heSoLuong = heSoLuong;
     }
@@ -28,19 +28,14 @@ public class NhanVienBienChe extends NhanVien {
     /**
      * @return boolean return the tienDo
      */
-    public String getTienDo() {
+    public boolean getTienDo() {
         return tienDo;
     }
 
     /**
      * @param tienDo the tienDo to set
      */
-    public void setTienDo(String tienDo) {
-        if(tienDo.equalsIgnoreCase("hoan thanh") || tienDo.equalsIgnoreCase("hoàn thành") ||
-        tienDo.equalsIgnoreCase("co") || tienDo.equalsIgnoreCase("Có"))
-            tienDo = "co";
-        else
-            tienDo = "khong";
+    public void setTienDo(boolean tienDo) {
         this.tienDo = tienDo;
     }
 
@@ -51,7 +46,7 @@ public class NhanVienBienChe extends NhanVien {
      * @param heSoLuong
      * @param tienDo
      */
-    public NhanVienBienChe(String maNV, String hoTen, LocalDate ngayVaoLam, double heSoLuong, String tienDo) {
+    public NhanVienBienChe(String maNV, String hoTen, LocalDate ngayVaoLam, double heSoLuong, boolean tienDo) {
         super(maNV, hoTen, ngayVaoLam);
         setHeSoLuong(heSoLuong);
         setTienDo(tienDo);
@@ -61,18 +56,16 @@ public class NhanVienBienChe extends NhanVien {
      * 
      */
     public NhanVienBienChe() {
-        this("", "", LocalDate.now(), 0, "khong");
+        this("", "", LocalDate.now(), 0, false);
     }
 
     @Override
     public double tinhLuong() {
-        double tien = 0;
-        double phuCap = 0;
-        if(tienDo.equalsIgnoreCase("co") || tienDo.equalsIgnoreCase("Có"))
-            phuCap = 2000000;
+        double tien = 1400000 * heSoLuong;
+        if (tienDo == true)
+            tien += 2000000;
         else
-            phuCap = 500000;
-        tien = 1400000 * heSoLuong + phuCap;
+            tien += 500000;
         return tien;
     }
 
@@ -80,6 +73,8 @@ public class NhanVienBienChe extends NhanVien {
     public String toString() {
         DecimalFormat df = new DecimalFormat("#,##0.##");
         DecimalFormat df2 = new DecimalFormat("#,##0.## VND");
-        return super.toString() + String.format("%-15s %-15s %-15s", df.format(heSoLuong), tienDo, df2.format(tinhLuong()));
+        String str  = (tienDo) ? "Hoan thanh" : "Khong hoan thanh";
+        return super.toString()
+                + String.format("%-15s %-17s %-15s", df.format(heSoLuong), str, df2.format(tinhLuong()));
     }
 }

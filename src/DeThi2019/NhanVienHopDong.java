@@ -19,6 +19,8 @@ public class NhanVienHopDong extends NhanVien {
     public void setSoNgayCong(int soNgayCong) {
         if (soNgayCong < 0)
             soNgayCong = 0;
+        else if (soNgayCong >= 30)
+            soNgayCong = 30;
         this.soNgayCong = soNgayCong;
     }
 
@@ -43,18 +45,26 @@ public class NhanVienHopDong extends NhanVien {
     @Override
     public double tinhLuong() {
         double tien = 0;
-        if(soNgayCong >= 20)
-            tien = soNgayCong * 200000;
-        else if(soNgayCong < 20 && soNgayCong >= 15)
+        if (soNgayCong >= 15) {
             tien = soNgayCong * 150000;
-        else if(soNgayCong < 15)
+            if(soNgayCong >= 20)
+                tien = soNgayCong * 200000;
+        }
+        else
             tien = soNgayCong * 100000;
+
+        // if(soNgayCong >= 20)
+        // tien = soNgayCong * 200000;
+        // else if(soNgayCong < 20 && soNgayCong >= 15)
+        // tien = soNgayCong * 150000;
+        // else if(soNgayCong < 15)
+        // tien = soNgayCong * 100000;
         return tien;
     }
 
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("#,##0.## VND");
-        return super.toString() + String.format("%-15s %-15s %-15s", "", soNgayCong, df.format(tinhLuong()));
+        return super.toString() + String.format("%-15s %-17s %-15s", "", soNgayCong, df.format(tinhLuong()));
     }
 }

@@ -2,6 +2,7 @@ package DeThi2019;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public abstract class NhanVien {
     private String maNV;
@@ -20,7 +21,7 @@ public abstract class NhanVien {
      */
     public void setMaNV(String maNV) {
         if(maNV.length() == 0 || maNV.equals(""))
-            maNV = "999999";
+            maNV = "xxx";
         this.maNV = maNV;
     }
 
@@ -36,7 +37,7 @@ public abstract class NhanVien {
      */
     public void setHoTen(String hoTen) {
         if(hoTen.length() == 0 || hoTen.equals(""))
-            hoTen = "Chưa xác định";
+            hoTen = "xxx";
         this.hoTen = hoTen;
     }
 
@@ -47,11 +48,29 @@ public abstract class NhanVien {
         return ngayVaoLam;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof NhanVien)) {
+            return false;
+        }
+        NhanVien nhanVien = (NhanVien) o;
+        return Objects.equals(maNV, nhanVien.maNV);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(maNV);
+    }
+
+
     /**
      * @param ngayVaoLam the ngayVaoLam to set
      */
     public void setNgayVaoLam(LocalDate ngayVaoLam) {
-        if(ngayVaoLam.isAfter(LocalDate.now()))
+        if(ngayVaoLam.isBefore(LocalDate.now()))
             ngayVaoLam = LocalDate.now();
         this.ngayVaoLam = ngayVaoLam;
     }

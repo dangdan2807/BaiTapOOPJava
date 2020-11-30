@@ -8,95 +8,128 @@ import java.util.Scanner;
 public class TestNhanVien {
     static Scanner input = new Scanner(System.in);
 
-    // Clears Screen in java
-    public static void clrscr() {
-        try {
-            if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            else
-                Runtime.getRuntime().exec("clear");
-        } catch (IOException | InterruptedException ex) {
+    public static void dungMangHinh() {
+        // 1. dừng màng hình
+        // 0. không dừng màng hính
+        int n = 1;
+        if (n == 1) {
+            System.out.println("\nẤn phím bất kì để tiếp tục");
+            input = new Scanner(System.in);
+            input.nextLine();
+        }
+    }
+
+    // Clears Screen console in java
+    // chi ap dung cho console (cmd/teminal)
+    public static void xoaMangHinh() {
+        // 1. xóa màng hình
+        // 0. không xóa màng hính
+        int n = 1;
+        if (n == 1) {
+            try {
+                if (System.getProperty("os.name").contains("Windows"))
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                else
+                    Runtime.getRuntime().exec("clear");
+            } catch (IOException | InterruptedException ex) {
+            }
         }
     }
 
     // Overloading NhapSo()
-    public static int nhapSo(int chon) {
-        boolean checkInput = true;
-        while (true) {
+    public static int Input(int n) {
+        boolean check = false;
+        while (!check) {
             try {
-                chon = input.nextInt();
-                checkInput = true;
+                input = new Scanner(System.in);
+                n = input.nextInt();
+                check = true;
             } catch (Exception e) {
-                System.out.println("Không hợp lệ nhập lại: ");
-                checkInput = false;
+                System.out.print("Khong hop le, nhap lai: ");
+                check = false;
                 input.nextLine();
             }
-            if (checkInput == true)
-                break;
         }
-        return chon;
+        return n;
     }
 
     // Overloading NhapSo()
-    public static double nhapSo(double chon) {
-        boolean checkInput = true;
-        while (true) {
+    public static double Input(double n) {
+        boolean check = false;
+        while (!check) {
             try {
-                chon = input.nextDouble();
-                checkInput = true;
+                input = new Scanner(System.in);
+                n = input.nextDouble();
+                check = true;
             } catch (Exception e) {
-                System.out.print("\nKhông hợp lệ nhập lại: ");
-                checkInput = false;
+                System.out.print("\nKhong hop le, nhap lai: ");
+                check = false;
                 input.nextLine();
             }
-            if (checkInput == true)
-                break;
         }
-        return chon;
+        return n;
+    }
+
+    // Overloading
+    public static String Input(String n) {
+        boolean check = false;
+        while (!check) {
+            input = new Scanner(System.in);
+            n = input.nextLine();
+            if (n.equals("") || n.length() == 0) {
+                System.out.println("Khong duoc rong !!!");
+                check = false;
+            } else
+                check = true;
+        }
+        return n;
     }
 
     public static NhanVien nhap(int n) {
         NhanVien nv;
-        Scanner scan = new Scanner(System.in);
 
         System.out.print("Nhap ma NV: ");
-        String maNV = scan.next();
-        scan = new Scanner(System.in);
+        String maNV = "";
+        maNV = Input(maNV);
 
         System.out.print("Nhap ten NV: ");
-        String hoTen = scan.nextLine();
-        scan = new Scanner(System.in);
+        String hoTen = "";
+        hoTen = Input(hoTen);
 
-        System.out.print("Nhap ngay vao lam");
+        System.out.print("Nhap ngay vao lam: ");
         int ngay = 0;
-        ngay = nhapSo(ngay);
-        System.out.print("Nhap thang vao lam");
+        ngay = Input(ngay);
+        System.out.print("Nhap thang vao lam: ");
         int thang = 0;
-        thang = nhapSo(thang);
-        System.out.print("Nhap nam ngay vao lam");
+        thang = Input(thang);
+        System.out.print("Nhap nam ngay vao lam: ");
         int nam = 0;
-        nam = nhapSo(nam);
+        nam = Input(nam);
 
-        int soNgayCong = 0;
+        int soNgayCong = 0, temp = 0;
         double heSoLuong = 0;
-        String tienDo = "";
+        boolean tienDo;
         if (n == 1) {
             // Nhan vien bien che
-            scan = new Scanner(System.in);
             System.out.print("Nhap he so luong: ");
-            heSoLuong = nhapSo(heSoLuong);
+            heSoLuong = Input(heSoLuong);
 
-            scan = new Scanner(System.in);
-            System.out.print("Da tien Do hoan thanh cong viec(co/khong): ");
-            tienDo = scan.next();
-
+            System.out.print("Da tien Do hoan thanh cong viec(1/0): ");
+            while (true) {
+                temp = Input(temp);
+                if (temp == 1) {
+                    tienDo = true;
+                    break;
+                } else if (temp == 0) {
+                    tienDo = false;
+                    break;
+                }
+            }
             nv = new NhanVienBienChe(maNV, hoTen, LocalDate.of(nam, thang, ngay), heSoLuong, tienDo);
         } else {
             // nhan vien hop dong
-            scan = new Scanner(System.in);
             System.out.print("Nhap so ngay cong: ");
-            soNgayCong = nhapSo(soNgayCong);
-
+            soNgayCong = Input(soNgayCong);
             nv = new NhanVienHopDong(maNV, hoTen, LocalDate.of(nam, thang, ngay), soNgayCong);
         }
         return nv;
@@ -105,18 +138,18 @@ public class TestNhanVien {
     public static void main(String[] args) {
         DecimalFormat df = new DecimalFormat("#,##0.## VND");
         QLNhanVien ds = new QLNhanVien();
-        int choose, chon = 0;
+        int choose = 0, chon = 0;
         String temp;
         boolean kt = false;
 
-        ds.them(new NhanVienBienChe("BC01", "Nguyen Van A", LocalDate.of(2020, 3, 23), 3.0f, "khong"));
-        ds.them(new NhanVienBienChe("BC02", "Nguyen Van B", LocalDate.of(2020, 3, 23), 5.0f, "khong"));
+        ds.them(new NhanVienBienChe("BC01", "Nguyen Van A", LocalDate.of(2020, 3, 23), 3.0f, true));
+        ds.them(new NhanVienBienChe("BC02", "Nguyen Van B", LocalDate.of(2020, 3, 23), 5.0f, false));
         ds.them(new NhanVienHopDong("HD01", "Tran Van B", LocalDate.of(2019, 4, 23), 21));
         ds.them(new NhanVienHopDong("HD02", "Tran Van C", LocalDate.of(2018, 2, 13), 16));
         ds.them(new NhanVienHopDong("HD03", "Tran Van D", LocalDate.of(2016, 4, 25), 13));
 
         do {
-            clrscr();
+            xoaMangHinh();
             System.out.println("========== MENU ==========");
             System.out.println("1. Thêm Nhan Vien");
             System.out.println("2. Xuất Danh Sach Nhan Vien");
@@ -124,34 +157,22 @@ public class TestNhanVien {
             System.out.println("4. Cap Nhap So Ngay Cong");
             System.out.println("5. Xuat DS Nhan Vien Khong Hoan Thanh Dung Tien Do");
             System.out.println("0. Thoát");
-            System.out.println("\nNhập lựa chọn: ");
-            try {
-                choose = input.nextInt();
-            } catch (Exception e) {
-                System.out.println("Nhập số nguyên dương: ");
-                choose = -1;
-            }
+            System.out.print("\nNhập lựa chọn: ");
+            choose = Input(choose);
 
             switch (choose) {
                 case 0:
                     System.out.println("Kết thúc Chương trình");
                     return;
                 case 1:
-                    clrscr();
+                    xoaMangHinh();
                     input = new Scanner(System.in);
                     System.out.println("1. Them Nhan Vien Bien Che");
                     System.out.println("2. Them Nhan Vien Hop Dong");
-                    boolean checkInput = true;
                     while (true) {
-                        try {
-                            System.out.println("Nhập lựa chọn: ");
-                            chon = input.nextInt();
-                            checkInput = true;
-                        } catch (Exception e) {
-                            checkInput = false;
-                            input.nextLine();
-                        }
-                        if (checkInput == true && (chon == 1 || chon == 2))
+                        System.out.print("Nhập lựa chọn: ");
+                            chon = Input(chon);
+                        if (chon == 1 || chon == 2)
                             break;
                     }
                     NhanVien x;
@@ -159,25 +180,20 @@ public class TestNhanVien {
                     ds.them(x);
                     break;
                 case 2:
-                    clrscr();
+                    xoaMangHinh();
                     ds.xuatDS();
-
                     // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 3:
-                    clrscr();
+                    xoaMangHinh();
                     System.out.println("\nTinh Tong Tien Luong Phai Tra CHo Nhan Vien Trong 1 Thang: "
                             + df.format(ds.tinhTongTienLuong()));
                     // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 4:
-                    clrscr();
+                    xoaMangHinh();
                     input = new Scanner(System.in);
                     System.out.print("Nhap ma NV can cap nhat: ");
                     temp = input.next();
@@ -187,17 +203,13 @@ public class TestNhanVien {
                     else
                         System.out.println("Khong tim thay Nhan Vien");
                     // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 5:
-                    clrscr();
+                    xoaMangHinh();
                     ds.DSNVKhongHoanThanh();
                     // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 default:
                     break;
