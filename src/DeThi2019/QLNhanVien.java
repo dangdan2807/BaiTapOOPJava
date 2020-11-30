@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class QLNhanVien {
     ArrayList<NhanVien> ds;
-    
+
     static Scanner input = new Scanner(System.in);
 
     /**
@@ -76,10 +76,21 @@ public class QLNhanVien {
                 "Tien Do CV", "Luong");
         for (NhanVien i : ds) {
             if (i instanceof NhanVienBienChe)
-                if (((NhanVienBienChe) i).getTienDo() == true) {
+                if (((NhanVienBienChe) i).getTienDo() == false) {
                     System.out.println(i);
                 }
         }
+    }
+
+    public ArrayList<NhanVien> LayDSNVHoanThanh() {
+        ArrayList<NhanVien> ds2 = new ArrayList<NhanVien>();
+        for (NhanVien i : ds) {
+            if (i instanceof NhanVienBienChe)
+                if (((NhanVienBienChe) i).getTienDo() == true) {
+                    ds2.add(i);
+                }
+        }
+        return ds2;
     }
 
     public void xuatDS() {

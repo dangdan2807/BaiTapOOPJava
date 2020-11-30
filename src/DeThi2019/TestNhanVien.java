@@ -3,6 +3,7 @@ package DeThi2019;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TestNhanVien {
@@ -138,6 +139,7 @@ public class TestNhanVien {
     public static void main(String[] args) {
         DecimalFormat df = new DecimalFormat("#,##0.## VND");
         QLNhanVien ds = new QLNhanVien();
+        ArrayList<NhanVien> ds2 = new ArrayList<NhanVien>();
         int choose = 0, chon = 0;
         String temp;
         boolean kt = false;
@@ -156,6 +158,7 @@ public class TestNhanVien {
             System.out.println("3. Tinh Tong Tien Luong");
             System.out.println("4. Cap Nhap So Ngay Cong");
             System.out.println("5. Xuat DS Nhan Vien Khong Hoan Thanh Dung Tien Do");
+            System.out.println("6. Tra ve DS Nhan Vien Hoan Thanh Dung Tien Do");
             System.out.println("0. Thoát");
             System.out.print("\nNhập lựa chọn: ");
             choose = Input(choose);
@@ -187,7 +190,7 @@ public class TestNhanVien {
                     break;
                 case 3:
                     xoaMangHinh();
-                    System.out.println("\nTinh Tong Tien Luong Phai Tra CHo Nhan Vien Trong 1 Thang: "
+                    System.out.println("\nTinh Tong Tien Luong Phai Tra Cho Nhan Vien Trong 1 Thang: "
                             + df.format(ds.tinhTongTienLuong()));
                     // dừng màng hình để xem kết quả
                     dungMangHinh();
@@ -208,6 +211,15 @@ public class TestNhanVien {
                 case 5:
                     xoaMangHinh();
                     ds.DSNVKhongHoanThanh();
+                    // dừng màng hình để xem kết quả
+                    dungMangHinh();
+                    break;
+                case 6:
+                    xoaMangHinh();
+                    ds2 = ds.LayDSNVHoanThanh();
+                    for (NhanVien i : ds2) {
+                        System.out.println(i);
+                    }
                     // dừng màng hình để xem kết quả
                     dungMangHinh();
                     break;
