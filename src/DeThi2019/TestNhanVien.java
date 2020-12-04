@@ -37,7 +37,7 @@ public class TestNhanVien {
         }
     }
 
-    // Overloading NhapSo()
+    // Overloading
     public static int Input(int n) {
         boolean check = false;
         while (!check) {
@@ -54,7 +54,7 @@ public class TestNhanVien {
         return n;
     }
 
-    // Overloading NhapSo()
+    // Overloading
     public static double Input(double n) {
         boolean check = false;
         while (!check) {

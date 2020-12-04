@@ -186,6 +186,7 @@ public class Test {
                     else
                         System.out.println("khong tim thay");
                     dungMangHinh();
+                    break;
                 case 4:
                     xoaMangHinh();
                     System.out.println("Sap xep tang dan theo ten");
