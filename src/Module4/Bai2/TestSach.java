@@ -144,7 +144,6 @@ public class TestSach {
                     return;
                 case 1:
                     xoaMangHinh();
-                    input = new Scanner(System.in);
                     System.out.println("1. Tạo Sách Giao Khoa");
                     System.out.println("2. Tạo Sách Tham Khoa");
                     while (!check) {

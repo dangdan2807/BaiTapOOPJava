@@ -8,93 +8,123 @@ import java.util.Scanner;
 public class TestGD {
     static Scanner input = new Scanner(System.in);
 
-    // Clears Screen in java
-    public static void clrscr() {
-        try {
-            if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            else
-                Runtime.getRuntime().exec("clear");
-        } catch (IOException | InterruptedException ex) {
+    public static void dungMangHinh() {
+        // 1. dừng màng hình
+        // 0. không dừng màng hính
+        int n = 1;
+        if (n == 1) {
+            System.out.println("\nẤn phím bất kì để tiếp tục");
+            input = new Scanner(System.in);
+            input.nextLine();
         }
     }
 
-    // Overloading NhapSo()
-    public static int nhapSo(int chon) {
-        boolean checkInput = true;
-        while (true) {
+    // Clears Screen console in java
+    // chi ap dung cho console (cmd/teminal)
+    public static void xoaMangHinh() {
+        // 1. xóa màng hình
+        // 0. không xóa màng hính
+        int n = 0;
+        if (n == 1) {
             try {
-                chon = input.nextInt();
-                checkInput = true;
-            } catch (Exception e) {
-                System.out.println("Không hợp lệ nhập lại: ");
-                checkInput = false;
-                input.nextLine();
+                if (System.getProperty("os.name").contains("Windows"))
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                else
+                    Runtime.getRuntime().exec("clear");
+            } catch (IOException | InterruptedException ex) {
             }
-            if (checkInput == true)
-                break;
         }
-        return chon;
     }
 
-    // Overloading NhapSo()
-    public static double nhapSo(double chon) {
-        boolean checkInput = true;
-        while (true) {
+    // Overloading
+    public static int Input(int n, String str) {
+        boolean check = false;
+        while (!check) {
             try {
-                chon = input.nextDouble();
-                checkInput = true;
+                input = new Scanner(System.in);
+                System.out.print("Nhap " + str + ": ");
+                n = input.nextInt();
+                check = true;
             } catch (Exception e) {
-                System.out.print("\nKhông hợp lệ nhập lại: ");
-                checkInput = false;
-                input.nextLine();
+                System.out.println("Khong hop le !!!");
+                check = false;
             }
-            if (checkInput == true)
-                break;
         }
-        return chon;
+        return n;
+    }
+
+    // Overloading
+    public static double Input(double n, String str) {
+        boolean check = false;
+        while (!check) {
+            try {
+                input = new Scanner(System.in);
+                System.out.print("Nhap " + str + ": ");
+                n = input.nextDouble();
+                check = true;
+            } catch (Exception e) {
+                System.out.println("Khong hop le !!!");
+                check = false;
+            }
+        }
+        return n;
+    }
+
+    // Overloading
+    public static String Input(String n, String str) {
+        boolean check = false;
+        while (!check) {
+            input = new Scanner(System.in);
+            System.out.print("Nhap " + str + ": ");
+            n = input.nextLine();
+            if (n.equals("") || n.length() == 0) {
+                System.out.println("Khong duoc rong !!!");
+                check = false;
+            } else
+                check = true;
+        }
+        return n;
     }
 
     public static GiaoDich nhap(int n) {
         System.out.println("Nhap thong tin giao dich: ");
-        Scanner s = new Scanner(System.in);
-        System.out.print("Nhập mã GD: ");
-        String magd = s.nextLine();
-        s = new Scanner(System.in);
-        int ngay = 0, thang = 0, nam = 0;
-        System.out.print("nhap ngay: ");
-        ngay = nhapSo(ngay);
-        System.out.print("nhap thang: ");
-        thang = nhapSo(thang);
-        System.out.print("nhap nam: ");
-        nam = nhapSo(nam);
-        System.out.print("nhap don gia: ");
-        double donGia = s.nextDouble();
-        System.out.print("nhap so luong gd: ");
-        int soLuong = 0;
-        soLuong = nhapSo(soLuong);
-        double tiGia = 1;
+        String maGD = "", loai = "";
+        int ngay = 0, thang = 0, nam = 0, soLuong = 0;
+        double donGia = 0, tiGia = 1;
+        maGD = Input(maGD, "ma GD");
+        ngay = Input(ngay, "ngay");
+        thang = Input(thang, "thang");
+        nam = Input(nam, "nam");
+        donGia = Input(donGia, "don gia");
+        soLuong = Input(soLuong, "so luong");
         if (n == 2) {
-            System.out.print("nhap ti gia");
-            tiGia = nhapSo(tiGia);
-            System.out.print("nhap loai tien te: ");
+            tiGia = Input(tiGia, "ti gia");
+            loai = Input(loai, "loai tien te");
         } else
-            System.out.print("nhap loai Vang: ");
-        s = new Scanner(System.in);
-        String loai = s.nextLine();
+            loai = Input(loai, "loai Vang");
         GiaoDich gd;
         if (n == 2)
-            gd = new GDTienTe(magd, LocalDate.of(nam, thang, ngay), donGia, soLuong, tiGia, loai);
+            gd = new GDTienTe(maGD, LocalDate.of(nam, thang, ngay), donGia, soLuong, tiGia, loai);
         else
-            gd = new GDVang(magd, LocalDate.of(nam, thang, ngay), donGia, soLuong, loai);
+            gd = new GDVang(maGD, LocalDate.of(nam, thang, ngay), donGia, soLuong, loai);
         return gd;
+    }
+
+    public static void menu() {
+        System.out.println("========== MENU ==========");
+        System.out.println("1. Thêm Giao Dịch");
+        System.out.println("2. Xuất Giao Dịch");
+        System.out.println("3. Xuất tổng số lượng của từng loại giao dịch");
+        System.out.println("4. Tính trung bình thành tiền của giao dịch tiền tệ");
+        System.out.println("5. Xuất danh sách tất cả các giao dịch lớn hơn 1 tỷ");
+        System.out.println("0. Thoát");
     }
 
     public static void main(String[] args) {
         DecimalFormat df = new DecimalFormat("#,##0.## VND");
         QLGD ds = new QLGD();
-        int choose, chon = 0;
-        String temp;
+        int choose = 0, chon = 0;
+        boolean check = false;
         // ds.themGD(new GDVang("Vang01", LocalDate.of(2020, 4, 1), 1000000000, 3,
         // "9999"));
         // ds.themGD(new GDVang("Vang02", LocalDate.of(2020, 3, 25), 5000000, 7,
@@ -110,86 +140,51 @@ public class TestGD {
         // ds.xuatDS();
 
         do {
-            clrscr();
-            System.out.println("========== MENU ==========");
-            System.out.println("1. Thêm Giao Dịch");
-            System.out.println("2. Xuất Giao Dịch");
-            System.out.println("3. Xuất tổng số lượng của từng loại giao dịch");
-            System.out.println("4. Tính trung bình thành tiền của giao dịch tiền tệ");
-            System.out.println("5. Xuất danh sách tất cả các giao dịch lớn hơn 1 tỷ");
-            System.out.println("0. Thoát");
-            System.out.println("\nNhập lựa chọn: ");
-            try {
-                choose = input.nextInt();
-            } catch (Exception e) {
-                System.out.println("Nhập số nguyên dương: ");
-                choose = -1;
-            }
-
+            xoaMangHinh();
+            menu();
+            choose = Input(choose, "lua chon");
+            System.out.println("");
             switch (choose) {
                 case 0:
                     System.out.println("Kết thúc Chương trình");
                     return;
                 case 1:
-                    clrscr();
-                    input = new Scanner(System.in);
+                    xoaMangHinh();
                     System.out.println("1. Tạo giao dịch vàng");
                     System.out.println("2. Tạo giao dịch tiền tệ");
-                    boolean checkInput = true;
-                    while (true) {
-                        try {
-                            System.out.println("Nhập số: ");
-                            chon = input.nextInt();
-                            checkInput = true;
-                        } catch (Exception e) {
-                            checkInput = false;
-                            input.nextLine();
-                        }
-                        if (checkInput == true && (chon == 1 || chon == 2))
-                            break;
+                    while (!check) {
+                        chon = Input(chon, "lua chon");
+                        if (chon == 1 || chon == 2)
+                            check = true;
                     }
                     GiaoDich gd;
                     gd = nhap(chon);
                     ds.themGD(gd);
                     break;
                 case 2:
-                    clrscr();
+                    xoaMangHinh();
                     ds.xuatDS();
-
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 3:
-                    clrscr();
+                    xoaMangHinh();
                     ds.soLuongTungLoaiGD();
-
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 4:
-                    clrscr();
+                    xoaMangHinh();
                     System.out.println(
                             "Trung bình thành tiền của giao dịch tiền tệ: " + df.format(ds.tinhTBThanhTienCuaGDTT()));
-
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 5:
-                    clrscr();
+                    xoaMangHinh();
                     ds.xuatGD1Ty();
-
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 default:
+                    System.out.println("Lua chon khong hop le !!!");
+                    dungMangHinh();
                     break;
             }
         } while (true);
