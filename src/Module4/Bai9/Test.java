@@ -94,14 +94,11 @@ public class Test {
             str = "Customer";
         System.out.println("Nhap thong tin cua " + str);
 
-        String hoTen = "";
+        String hoTen = "", diaChi = "", tienDo = "";
+        double diemMH1 = 0, diemMH2 = 0;
         hoTen = Input(hoTen, "ho Ten");
-
-        String diaChi = "";
         diaChi = Input(diaChi, "dia Chi");
 
-        double diemMH1 = 0, diemMH2 = 0;
-        String tienDo = "";
         Person x = null;
         if (n == 1) {
             // Student
@@ -135,9 +132,8 @@ public class Test {
 
     public static void main(String[] args) {
         Management ds = new Management();
-        int choose = 0, chon = 0;
+        int choose = 0, chon = 0, checkInput = 0;
         boolean check = false;
-        int checkInput = 0;
         String hoTen = "";
         ds.them(new Student("Nguyen Van A", "Q.7, tp.hcm", 8, 4));
         ds.them(new Student("Nguyen Van B", "Q.7, tp.hcm", 8, 10));

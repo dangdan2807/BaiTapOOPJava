@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Management {
     ArrayList<Person> ds;
+    private Scanner scan;
 
     /**
      * 
@@ -30,7 +31,7 @@ public class Management {
     }
 
     public int xoa(String maHang) {
-        Scanner scan = new Scanner(System.in);
+        scan = new Scanner(System.in);
         boolean checkInput = true;
         for (int i = 0; i < ds.size(); i++) {
             if (ds.get(i).getHoTen().equalsIgnoreCase(maHang)) {
@@ -44,7 +45,7 @@ public class Management {
                         check = scan.nextInt();
                         checkInput = true;
                     } catch (Exception e) {
-                        System.out.println("Nhap so nguyen duong");
+                        System.out.println("Khong hop le !!!");
                         checkInput = false;
                     }
                     if ((check == 1 || check == 2) && checkInput == true)
