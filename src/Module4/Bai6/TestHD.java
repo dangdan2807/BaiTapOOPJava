@@ -8,9 +8,9 @@ import java.util.Scanner;
 public class TestHD {
     static Scanner input = new Scanner(System.in);
 
-    // dừng màng hình để xem kết quả
     public static void dungMangHinh() {
-        // check co dung hay khong
+        // 1. dừng màng hình
+        // 0. không dừng màng hính
         int n = 1;
         if (n == 1) {
             System.out.println("\nẤn phím bất kì để tiếp tục");
@@ -20,11 +20,12 @@ public class TestHD {
     }
 
     // Clears Screen console in java
-    public static void clrscr() {
-        // chi ap dung cho console (cmd/teminal)
-        int n = 1;
-        if(n == 1)
-        {
+    // chi ap dung cho console (cmd/teminal)
+    public static void xoaMangHinh() {
+        // 1. xóa màng hình
+        // 0. không xóa màng hính
+        int n = 0;
+        if (n == 1) {
             try {
                 if (System.getProperty("os.name").contains("Windows"))
                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -35,54 +36,54 @@ public class TestHD {
         }
     }
 
-    // Overloading Input()
-    public static String Input(String str) {
+    // Overloading
+    public static int Input(int n, String str) {
+        boolean check = false;
+        while (!check) {
+            try {
+                input = new Scanner(System.in);
+                System.out.print("Nhap " + str + ": ");
+                n = input.nextInt();
+                check = true;
+            } catch (Exception e) {
+                System.out.println("Khong hop le !!!");
+                check = false;
+            }
+        }
+        return n;
+    }
+
+    // Overloading
+    public static double Input(double n, String str) {
+        boolean check = false;
+        while (!check) {
+            try {
+                input = new Scanner(System.in);
+                System.out.print("Nhap " + str + ": ");
+                n = input.nextDouble();
+                check = true;
+            } catch (Exception e) {
+                System.out.println("Khong hop le !!!");
+                check = false;
+            }
+        }
+        return n;
+    }
+
+    // Overloading
+    public static String Input(String n, String str) {
         boolean check = false;
         while (!check) {
             input = new Scanner(System.in);
-            str = input.nextLine();
-            if (str.equals(""))
-                System.out.println("Khong duoc rong!!!, nhap lai: ");
-            else
-                check = true;
-        }
-        return str;
-    }
-
-    // Overloading Input()
-    public static int Input(int chon) {
-        boolean check = true;
-        while (true) {
-            try {
-                chon = input.nextInt();
-                check = true;
-            } catch (Exception e) {
-                System.out.println("Không hợp lệ nhập lại: ");
+            System.out.print("Nhap " + str + ": ");
+            n = input.nextLine();
+            if (n.equals("") || n.length() == 0) {
+                System.out.println("Khong duoc rong !!!");
                 check = false;
-                input.nextLine();
-            }
-            if (check == true)
-                break;
-        }
-        return chon;
-    }
-
-    // Overloading Input()
-    public static double Input(double chon) {
-        boolean check = true;
-        while (true) {
-            try {
-                chon = input.nextDouble();
+            } else
                 check = true;
-            } catch (Exception e) {
-                System.out.print("\nKhông hợp lệ nhập lại: ");
-                check = false;
-                input.nextLine();
-            }
-            if (check == true)
-                break;
         }
-        return chon;
+        return n;
     }
 
     public static HoaDon nhap(int n) {
@@ -93,120 +94,93 @@ public class TestHD {
             data = "ngay";
         System.out.println("Nhap thong tin cua hoa don " + data);
 
-        System.out.print("Nhap ma hoa don: ");
-        String maHoaDon = "";
-        maHoaDon = Input(maHoaDon);
-
-        System.out.print("Nhap ngay lap hd: ");
-        int ngay = 0;
-        ngay = Input(ngay);
-
-        System.out.print("Nhap thang lap hd: ");
-        int thang = 0;
-        thang = Input(thang);
-
-        System.out.print("Nhap nam lap hd: ");
-        int nam = 0;
-        nam = Input(nam);
-
-        System.out.print("Nhap ten khach hang: ");
-        String tenKH = "";
-        tenKH = Input(tenKH);
-
-        System.out.print("Nhap ma phong: ");
-        String maPhong = "";
-        maPhong = Input(maPhong);
-
-        System.out.print("Nhap don gia: ");
-        double donGia = 0;
-        donGia = Input(donGia);
-
-        int soNgayThue = 0, soGioThue = 0;
+        String maHoaDon = "", tenKH = "", maPhong = "";
+        int ngay = 0, thang = 0, nam = 0, donGia = 0, soNgayThue = 0, soGioThue = 0;
+        maHoaDon = Input(maHoaDon, " ma Hoa Don");
+        ngay = Input(ngay, "ngay lap hd");
+        thang = Input(thang, "thang lap hd");
+        nam = Input(nam, "nam lap hd");
+        tenKH = Input(tenKH, "ten KH");
+        maPhong = Input(maPhong, "ma phong");
+        donGia = Input(donGia, "don gia");
         HoaDon x;
         if (n == 1) {
             // hoa don theo gio
-            System.out.print("Nhap so gio thue: ");
-            soGioThue = Input(soGioThue);
+            soGioThue = Input(soGioThue, "so gio thue");
             x = new HoaDonGio(maHoaDon, LocalDate.of(nam, thang, ngay), tenKH, maPhong, donGia, soGioThue);
         } else {
             // hoa don theo ngay
-            System.out.print("Nhap so ngay thue: ");
-            soNgayThue = Input(soNgayThue);
+            soNgayThue = Input(soNgayThue, "so ngay thue");
             x = new HoaDonNgay(maHoaDon, LocalDate.of(nam, thang, ngay), tenKH, maPhong, donGia, soNgayThue);
         }
         return x;
+    }
+
+    public static void menu() {
+        System.out.println("========== MENU ==========");
+        System.out.println("1. Thêm Hoa Don");
+        System.out.println("2. Xuất Hoa Don");
+        System.out.println("3. Thong ke so luong hoa don theo gio");
+        System.out.println("4. Thong ke so luong hoa don theo ngay");
+        System.out.println("5. Tính Tong thành tiền của Hoa Don trong thang x, nam y");
+        System.out.println("0. Thoát");
     }
 
     public static void main(String[] args) {
         DecimalFormat df = new DecimalFormat("#,##0.## VND");
         DanhSachHoaDon ds = new DanhSachHoaDon();
         int choose = 0, chon = 0;
+        boolean check = false;
         // test case
-        // ds.them(new HoaDonGio("G01", LocalDate.of(2020, 5, 12), "A", "A", 100000, 15));
-        // ds.them(new HoaDonGio("G02", LocalDate.of(2020, 5, 1), "B", "A", 100000, 17));
-        // ds.them(new HoaDonNgay("N01", LocalDate.of(2019, 7, 12), "D", "B", 150000, 3));
+        ds.them(new HoaDonGio("G01", LocalDate.of(2020, 5, 12), "A", "A", 100000, 15));
+        ds.them(new HoaDonGio("G02", LocalDate.of(2020, 5, 1), "B", "A", 100000, 17));
+        ds.them(new HoaDonNgay("N01", LocalDate.of(2019, 7, 12), "D", "B", 150000, 3));
         // ds.them(new HoaDonNgay("N02", LocalDate.of(2017, 5, 12), "E", "B", 150000, 10));
 
         do {
-            clrscr();
-            System.out.println("========== MENU ==========");
-            System.out.println("1. Thêm Hoa Don");
-            System.out.println("2. Xuất Hoa Don");
-            System.out.println("3. Thong ke so luong hoa don theo gio");
-            System.out.println("4. Thong ke so luong hoa don theo ngay");
-            System.out.println("5. Tính Tong thành tiền của Hoa Don trong thang x, nam y");
-            System.out.println("0. Thoát");
-            System.out.println("\nNhập lựa chọn: ");
-            choose = Input(choose);
+            xoaMangHinh();
+            menu();
+            choose = Input(choose, "lua chon");
+            System.out.println("");
 
             switch (choose) {
                 case 0:
                     System.out.println("Kết thúc Chương trình");
                     return;
                 case 1:
-                    clrscr();
+                    xoaMangHinh();
                     input = new Scanner(System.in);
                     System.out.println("1. Tạo hoa don theo gio");
                     System.out.println("2. Tạo hoa don theo ngay");
-                    boolean checkInput = true;
-                    while (true) {
-                        try {
-                            System.out.println("Nhập lựa chọn: ");
-                            chon = input.nextInt();
-                            checkInput = true;
-                        } catch (Exception e) {
-                            checkInput = false;
-                            input.nextLine();
-                        }
-                        if (checkInput == true && (chon == 1 || chon == 2))
-                            break;
+                    while (!check) {
+                        chon = Input(chon, "lua chon");
+                        if (chon == 1 || chon == 2)
+                            check = true;
                     }
                     HoaDon x;
                     x = nhap(chon);
                     ds.them(x);
                     break;
                 case 2:
-                    clrscr();
+                    xoaMangHinh();
                     ds.xuatDS();
                     dungMangHinh();
                     break;
                 case 3:
-                    clrscr();
+                    xoaMangHinh();
                     System.out.println("Thong Ke So Luong HD Theo: " + ds.thongKeSoLuongHDTheoGio());
                     dungMangHinh();
                     break;
                 case 4:
-                    clrscr();
+                    xoaMangHinh();
                     System.out.println("Thong Ke So Luong HD Ngay: " + ds.thongKeSoLuongHDTheoNgay());
                     dungMangHinh();
                     break;
                 case 5:
-                    clrscr();
+                    xoaMangHinh();
                     int thang = 0, nam = 0;
-                    System.out.print("Nhap thang: ");
-                    thang = Input(thang);
-                    System.out.print("Nhap nam: ");
-                    nam = Input(nam);
+                    thang = Input(thang, "thang");
+                    nam = Input(nam, "nam");
                     System.out
                             .println("Tong Thanh Tien cua cac hoa don: " + df.format(ds.tinhTongThanhTien(thang, nam)));
                     dungMangHinh();
