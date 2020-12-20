@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class QLHangHoa {
     ArrayList<HangHoa> ds;
+    private Scanner scan;
 
     /**
      * 
@@ -108,27 +109,27 @@ public class QLHangHoa {
     }
 
     public int xoa(String maHang) {
-        Scanner scan = new Scanner(System.in);
-        boolean checkInput = true;
+        scan = new Scanner(System.in);
+        boolean check = true;
         for (int i = 0; i < ds.size(); i++) {
             if (ds.get(i).getMaHang().equalsIgnoreCase(maHang)) {
-                int check = 0;
-                while (checkInput) {
+                int tempInput = 0;
+                while (!check) {
                     System.out.println("Ban co chac ban: ");
                     System.out.println("1. co");
                     System.out.println("2. khong");
                     try {
                         scan = new Scanner(System.in);
-                        check = scan.nextInt();
-                        checkInput = true;
+                        tempInput = scan.nextInt();
+                        check = true;
                     } catch (Exception e) {
-                        System.out.println("Nhap so nguyen duong");
-                        checkInput = false;
+                        System.out.println("Khong hop le !!!");
+                        check = false;
                     }
-                    if ((check == 1 || check == 2) && checkInput == true)
-                        break;
+                    if (tempInput == 1 || tempInput == 2)
+                        check = true;
                 }
-                if (check == 1) {
+                if (tempInput == 1) {
                     ds.remove(i);
                     return 1;
                 } else
@@ -140,7 +141,7 @@ public class QLHangHoa {
 
     public boolean capNhapDonGiaHangHoa(String maHang) {
         DecimalFormat df = new DecimalFormat("#,##0.##");
-        Scanner scan = new Scanner(System.in);
+        scan = new Scanner(System.in);
         double giaMoi = 0;
         boolean check = false;
         for (HangHoa i : ds) {

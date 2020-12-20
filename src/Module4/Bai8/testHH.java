@@ -103,27 +103,20 @@ public class testHH {
             str = "Sanh Su";
         System.out.println("Nhap thong tin cua hang hoa" + str);
 
-        String maHang = "";
-        maHang = Input(maHang, "ma hang");
-
-        String tenHang = "";
-        tenHang = Input(tenHang, "ten hang");
-
+        String maHang = "", tenHang = "", nsx = "";
         double donGia = 0;
-        donGia = Input(donGia, "don gia");
-
-        int soLuong = 0;
-        soLuong = Input(soLuong, "so luong");
-
-        String nsx = "";
-        int congSuat = 0, thoiGianBaoHanh = 0;
+        int soLuong = 0, congSuat = 0, thoiGianBaoHanh = 0;
         LocalDate ngaySX, ngayHH;
+        maHang = Input(maHang, "ma hang");
+        tenHang = Input(tenHang, "ten hang");
+        donGia = Input(donGia, "don gia");
+        soLuong = Input(soLuong, "so luong");
         HangHoa x = null;
         if (n == 1) {
             // Hang thuc pham
             nsx = Input(nsx, "NCC");
             ngaySX = nhapNgay("ngay san xuat");
-            ngayHH = nhapNgay("mgay het han");
+            ngayHH = nhapNgay("ngay het han");
             x = new HThucPham(maHang, tenHang, donGia, soLuong, nsx, ngaySX, ngayHH);
 
         } else if (n == 2) {
@@ -134,7 +127,7 @@ public class testHH {
         } else {
             // Hang sanh su
             nsx = Input(nsx, "NSX");
-            ngaySX = nhapNgay("kho");
+            ngaySX = nhapNgay("ngay nhap kho");
             x = new HSanhSu(maHang, tenHang, donGia, soLuong, nsx, ngaySX);
         }
         return x;
@@ -165,8 +158,10 @@ public class testHH {
         int checkInput = 0;
         boolean checkBool = false;
         String maHang = "";
-        ds.them(new HThucPham("TP01", "Ca say kho", 75000, 10, "A", LocalDate.of(2020, 11, 25), LocalDate.of(2020, 12, 25)));
-        ds.them(new HThucPham("TP02", "Thit say kho", 100000, 10, "B", LocalDate.of(2020, 11, 25), LocalDate.of(2020, 11, 28)));
+        ds.them(new HThucPham("TP01", "Ca say kho", 75000, 10, "A", LocalDate.of(2020, 11, 25),
+                LocalDate.of(2020, 12, 25)));
+        ds.them(new HThucPham("TP02", "Thit say kho", 100000, 10, "B", LocalDate.of(2020, 11, 25),
+                LocalDate.of(2020, 11, 28)));
         ds.them(new HDienMay("DM01", "Tivi LG", 10000000, 5, 24, 1000));
         ds.them(new HDienMay("DM02", "Tu lanh", 7000000, 2, 60, 1000));
         ds.them(new HSanhSu("SS01", "Binh", 1000000, 20, "C", LocalDate.of(2020, 11, 25)));
@@ -220,7 +215,7 @@ public class testHH {
                     xoaMangHinh();
                     maHang = Input(maHang, "ma hang");
                     HangHoa temp = ds.timKiemHangHoa(maHang);
-                    if(temp != null)
+                    if (temp != null)
                         System.out.println(temp.toString());
                     else
                         System.out.println("Khong tim thay hang hoa");
@@ -249,7 +244,7 @@ public class testHH {
                     xoaMangHinh();
                     maHang = Input(maHang, "ma hang");
                     checkInput = ds.xoa(maHang);
-                    if(checkInput == 1)
+                    if (checkInput == 1)
                         System.out.println("xoa thanh cong");
                     else if (checkInput == 0)
                         System.out.println("Ban quyet dinh khong xoa");
@@ -261,7 +256,7 @@ public class testHH {
                     xoaMangHinh();
                     maHang = Input(maHang, "ma hang");
                     checkBool = ds.capNhapDonGiaHangHoa(maHang);
-                    if(checkBool == true)
+                    if (checkBool == true)
                         System.out.println("cap nhat thanh cong");
                     else
                         System.out.println("khong tim thay hang hoa");
