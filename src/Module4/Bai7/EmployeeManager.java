@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class EmployeeManager {
     ArrayList<Employee> ds;
+    private Scanner scan;
 
     /**
      * 
@@ -27,30 +28,29 @@ public class EmployeeManager {
         }
         return false;
     }
-    
+
     public boolean xoaTheoSSN(int ssn) {
-        int check = 0;
-        boolean checkInput;
-        Scanner scan = new Scanner(System.in);
+        int tempInput = 0;
+        boolean check = false;
+        scan = new Scanner(System.in);
         for (Employee i : ds) {
             if (i.getSsn() == ssn) {
                 System.out.println("Ban co chac chan: ");
                 System.out.println("1. co");
                 System.out.println("2. khong");
-                while (true) {
+                while (!check) {
                     try {
+                        scan = new Scanner(System.in);
                         System.out.println("Nhập lựa chọn: ");
-                        check = scan.nextInt();
-                        checkInput = true;
+                        tempInput = scan.nextInt();
                     } catch (Exception e) {
                         System.out.println("Không hợp lệ nhập lại: ");
-                        checkInput = false;
-                        scan.nextLine();
+                        check = false;
                     }
-                    if (checkInput == true && (check == 1 || check == 2))
-                        break;
+                    if (tempInput == 1 || tempInput == 2)
+                        check = true;
                 }
-                if (check == 1) {
+                if (tempInput == 1) {
                     ds.remove(i);
                     return true;
                 } else
