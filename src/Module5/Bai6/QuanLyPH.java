@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class QuanLyPH {
     ArrayList<PhongHoc> ds;
+    private static Scanner input;
 
     /**
      * 
@@ -96,7 +97,7 @@ public class QuanLyPH {
 
     // Overloading NhapSo()
     public static int nhapSo(int chon) {
-        Scanner input = new Scanner(System.in);
+        input = new Scanner(System.in);
         boolean checkInput = true;
         while (true) {
             try {

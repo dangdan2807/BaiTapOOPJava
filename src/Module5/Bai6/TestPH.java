@@ -7,74 +7,93 @@ public class TestPH {
     static Scanner input = new Scanner(System.in);
     private static Scanner scan = new Scanner(System.in);
 
-    // Clears Screen in java
-    public static void clrscr() {
-        try {
-            if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            else
-                Runtime.getRuntime().exec("clear");
-        } catch (IOException | InterruptedException ex) {
+    public static void dungMangHinh() {
+        // 1. dừng màng hình
+        // 0. không dừng màng hính
+        int n = 1;
+        if (n == 1) {
+            System.out.println("\nẤn phím bất kì để tiếp tục");
+            input = new Scanner(System.in);
+            input.nextLine();
         }
     }
 
-    // Overloading NhapSo()
-    public static int nhapSo(int chon) {
-        boolean checkInput = true;
-        while (true) {
+    // Clears Screen console in java
+    // chi ap dung cho console (cmd/teminal)
+    public static void xoaMangHinh() {
+        // 1. xóa màng hình
+        // 0. không xóa màng hính
+        int n = 0;
+        if (n == 1) {
             try {
-                chon = input.nextInt();
-                checkInput = true;
-            } catch (Exception e) {
-                System.out.println("Không hợp lệ nhập lại: ");
-                checkInput = false;
-                input.nextLine();
+                if (System.getProperty("os.name").contains("Windows"))
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                else
+                    Runtime.getRuntime().exec("clear");
+            } catch (IOException | InterruptedException ex) {
             }
-            if (checkInput == true)
-                break;
         }
-        return chon;
     }
 
-    // Overloading NhapSo()
-    public static double nhapSo(double chon) {
-        boolean checkInput = true;
-        while (true) {
+    // Overloading
+    public static int Input(int n, String str) {
+        boolean check = false;
+        while (!check) {
             try {
-                chon = input.nextDouble();
-                checkInput = true;
+                input = new Scanner(System.in);
+                System.out.print("Nhap " + str + ": ");
+                n = input.nextInt();
+                check = true;
             } catch (Exception e) {
-                System.out.print("\nKhông hợp lệ nhập lại: ");
-                checkInput = false;
-                input.nextLine();
+                System.out.println("Khong hop le !!!");
+                check = false;
             }
-            if (checkInput == true)
-                break;
         }
-        return chon;
+        return n;
+    }
+
+    // Overloading
+    public static double Input(double n, String str) {
+        boolean check = false;
+        while (!check) {
+            try {
+                input = new Scanner(System.in);
+                System.out.print("Nhap " + str + ": ");
+                n = input.nextDouble();
+                check = true;
+            } catch (Exception e) {
+                System.out.println("Khong hop le !!!");
+                check = false;
+            }
+        }
+        return n;
+    }
+
+    // Overloading
+    public static String Input(String n, String str) {
+        boolean check = false;
+        while (!check) {
+            input = new Scanner(System.in);
+            System.out.print("Nhap " + str + ": ");
+            n = input.nextLine();
+            if (n.equals("") || n.length() == 0) {
+                System.out.println("Khong duoc rong !!!");
+                check = false;
+            } else
+                check = true;
+        }
+        return n;
     }
 
     public static PhongHoc nhap(int n) {
         PhongHoc ph;
-        System.out.print("Nhap ma phong: ");
-        String maPhong = scan.next();
-        scan = new Scanner(System.in);
-
-        System.out.print("Nhap day nha: ");
-        String dayNha = scan.next();
-        scan = new Scanner(System.in);
-
-        System.out.print("Nhap dien tich: ");
+        String maPhong = "", dayNha = "", mayChieu = "", chuyenNganh = "", bonChua = "";
+        int soBongDen = 0, mayTinh = 0, sucChua = 0;
         double dienTich = 0;
-        dienTich = nhapSo(dienTich);
-
-        System.out.print("Nhap so bong den: ");
-        int soBongDen = 0;
-        soBongDen = nhapSo(soBongDen);
-        scan = new Scanner(System.in);
-
-        String mayChieu, chuyenNganh, bonChua;
-        int mayTinh = 0, sucChua = 0;
+        maPhong = Input(maPhong, "ma phong");
+        dayNha = Input(dayNha, "day nha");
+        dienTich = Input(dienTich, "dien tich");
+        soBongDen = Input(soBongDen, "so bong den");
         if (n == 1) {
             // PhongLT
             System.out.print("Phong co may chieu hay khong (co / khong): ");
@@ -82,30 +101,39 @@ public class TestPH {
             ph = new PhongLT(maPhong, dayNha, dienTich, soBongDen, mayChieu);
         } else if (n == 2) {
             // PhongTN
-            System.out.print("Nhap chuyen nganh: ");
-            chuyenNganh = scan.nextLine();
-
-            System.out.print("Nhap suc chua: ");
-            sucChua = nhapSo(sucChua);
-            scan = new Scanner(System.in);
-
-            System.out.print("Phong co bon Chua hay khong (co / khong): ");
-            bonChua = scan.next();
+            chuyenNganh = Input(chuyenNganh, "chuyen nganh");
+            sucChua = Input(sucChua, "suc chua");
+            bonChua = Input(bonChua, "Phong co bon Chua hay khong (co / khong)");
             ph = new PhongTN(maPhong, dayNha, dienTich, soBongDen, chuyenNganh, sucChua, bonChua);
         } else {
             // PhongMT
-            System.out.println("Nhap so luong may tinh: ");
-            mayTinh = nhapSo(mayTinh);
+            mayTinh = Input(mayTinh, "so luong may tinh");
             ph = new PhongMT(maPhong, dayNha, dienTich, soBongDen, mayTinh);
         }
         return ph;
     }
 
+    public static void menu() {
+        System.out.println("========== MENU ==========");
+        System.out.println("1. Thêm Phong Hoc");
+        System.out.println("2. Xuất Danh Sach Phong Hoc");
+        System.out.println("3. Tim kiem Phong Hoc");
+        System.out.println("4. Xuất Danh Sach Phong Hoc Dat Chuan");
+        System.out.println("5. Sắp xếp danh sách tăng dần theo dãy nhà");
+        System.out.println("6. Sắp xếp danh sách giảm dần theo diện tích");
+        System.out.println("7. Sắp xếp danh sách tăng dần theo số bóng đèn");
+        System.out.println("8. Cập nhật số máy tính cho một phòng máy tính");
+        System.out.println("9. Xóa một phòng học");
+        System.out.println("10. Xuat tổng số phòng học");
+        System.out.println("11. Danh sách các phòng máy có 60 máy");
+        System.out.println("0. Thoát");
+    }
+
     public static void main(String[] args) {
         QuanLyPH ds = new QuanLyPH();
-        int choose, chon = 0;
-        String temp;
-        boolean kt = false;
+        int choose = 0, chon = 0;
+        String temp = "";
+        boolean kt = false, check = false;
 
         ds.themPH(new PhongMT("MT01", "B", 180, 10, 60));
         ds.themPH(new PhongMT("MT02", "B", 150, 10, 30));
@@ -115,118 +143,68 @@ public class TestPH {
         ds.themPH(new PhongLT("LT02", "D", 200, 15, "Khong"));
 
         do {
-            clrscr();
-            System.out.println("========== MENU ==========");
-            System.out.println("1. Thêm Phong Hoc");
-            System.out.println("2. Xuất Danh Sach Phong Hoc");
-            System.out.println("3. Tim kiem Phong Hoc");
-            System.out.println("4. Xuất Danh Sach Phong Hoc Dat Chuan");
-            System.out.println("5. Sắp xếp danh sách tăng dần theo dãy nhà");
-            System.out.println("6. Sắp xếp danh sách giảm dần theo diện tích");
-            System.out.println("7. Sắp xếp danh sách tăng dần theo số bóng đèn");
-            System.out.println("8. Cập nhật số máy tính cho một phòng máy tính");
-            System.out.println("9. Xóa một phòng học");
-            System.out.println("10. Xuat tổng số phòng học");
-            System.out.println("11. Danh sách các phòng máy có 60 máy");
-            System.out.println("0. Thoát");
-            System.out.println("\nNhập lựa chọn: ");
-            try {
-                choose = input.nextInt();
-            } catch (Exception e) {
-                System.out.println("Nhập số nguyên dương: ");
-                choose = -1;
-            }
-
+            xoaMangHinh();
+            menu();
+            choose = Input(choose, "lua chon");
+            System.out.println("");
             switch (choose) {
                 case 0:
                     System.out.println("Kết thúc Chương trình");
                     return;
                 case 1:
-                    clrscr();
+                    xoaMangHinh();
                     input = new Scanner(System.in);
                     System.out.println("1. Them Phong Hoc Ly Thuyet");
                     System.out.println("2. Them Phong Hoc Thi Nghiem");
                     System.out.println("3. Them Phong Hoc May Tinh");
-                    boolean checkInput = true;
-                    while (true) {
-                        try {
-                            System.out.println("Nhập lựa chọn: ");
-                            chon = input.nextInt();
-                            checkInput = true;
-                        } catch (Exception e) {
-                            checkInput = false;
-                            input.nextLine();
-                        }
-                        if (checkInput == true && (chon == 1 || chon == 2 || chon == 3))
-                            break;
+                    while (!check) {
+                        chon = Input(chon, "lua chon");
+                        if (chon == 1 || chon == 2 || chon == 3)
+                            check = true;
                     }
                     PhongHoc gd;
                     gd = nhap(chon);
                     ds.themPH(gd);
                     break;
                 case 2:
-                    clrscr();
+                    xoaMangHinh();
                     ds.xuatDS();
-
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 3:
-                    clrscr();
+                    xoaMangHinh();
                     System.out.println("\nTim Kiem Phong Hoc");
-                    System.out.print("Nhap ma Phong: ");
-                    input = new Scanner(System.in);
-                    String t = input.next();
-                    ds.timKiemPH(t);
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    temp = Input(temp, "ma phong");
+                    ds.timKiemPH(temp);
+                    dungMangHinh();
                     break;
                 case 4:
-                    clrscr();
+                    xoaMangHinh();
                     ds.xuatDSDatChuan();
-
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 5:
-                    clrscr();
+                    xoaMangHinh();
                     ds.sapXepDSTangTheoDayNha();
                     System.out.println("Sap xep thanh cong");
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 6:
-                    clrscr();
+                    xoaMangHinh();
                     ds.sapXepDSGiamTheoDienTich();
                     System.out.println("Sap xep thanh cong");
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 7:
-                    clrscr();
+                    xoaMangHinh();
                     ds.sapXepDSTangTheoSoBongDien();
                     System.out.println("Sap xep thanh cong");
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 8:
-                    clrscr();
+                    xoaMangHinh();
                     System.out.println("Cap Nhat So Luong May tinh cho mot Phong Hoc May tinh");
-                    System.out.print("Nhap ma Phong: ");
-                    input = new Scanner(System.in);
-                    temp = input.next();
+                    temp = Input(temp, "ma phong");
 
                     kt = ds.capNhatSoMayTinh(temp);
                     if (kt == true)
@@ -234,17 +212,12 @@ public class TestPH {
                     else
                         System.out.println("Cap Nhat That Bai");
                     kt = false;
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 9:
-                    clrscr();
+                    xoaMangHinh();
                     System.out.println("Xoa Mot Phong Hoc:");
-                    System.out.print("Nhap ma Phong: ");
-                    input = new Scanner(System.in);
-                    temp = input.next();
+                    temp = Input(temp, "ma phong");
 
                     kt = ds.xoaPH(temp);
                     if (kt == true)
@@ -252,26 +225,17 @@ public class TestPH {
                     else
                         System.out.println("Cap Nhat That Bai");
                     kt = false;
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 10:
-                    clrscr();
+                    xoaMangHinh();
                     System.out.println("Xuat tổng số phòng học: " + ds.tongSoPhongHoc());
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 case 11:
-                    clrscr();
+                    xoaMangHinh();
                     ds.xuatDSPH60MT();
-                    // dừng màng hình để xem kết quả
-                    System.out.println("\nẤn phím bất kì để tiếp tục");
-                    input.nextLine();
-                    temp = input.nextLine();
+                    dungMangHinh();
                     break;
                 default:
                     break;
