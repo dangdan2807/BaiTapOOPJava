@@ -110,7 +110,7 @@ public class QLHangHoa {
 
     public int xoa(String maHang) {
         scan = new Scanner(System.in);
-        boolean check = true;
+        boolean check = false;
         for (int i = 0; i < ds.size(); i++) {
             if (ds.get(i).getMaHang().equalsIgnoreCase(maHang)) {
                 int tempInput = 0;
@@ -121,7 +121,6 @@ public class QLHangHoa {
                     try {
                         scan = new Scanner(System.in);
                         tempInput = scan.nextInt();
-                        check = true;
                     } catch (Exception e) {
                         System.out.println("Khong hop le !!!");
                         check = false;
